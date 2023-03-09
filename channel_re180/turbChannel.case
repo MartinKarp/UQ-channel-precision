@@ -8,7 +8,7 @@ initial_condition = 'user'
 &NEKO_PARAMETERS
 dt = 3d-3
 T_end = 3000.0
-nsamples = 1000
+nsamples = 500
 uinf= 1.0,0.0,0.0
 output_bdry = .true.
 Re = 2860
@@ -23,7 +23,7 @@ bc_labels(3) = 'w'
 bc_labels(4) = 'w'
 jlimit='11:30:00'
 restart_file='joblimit00000.chkp'
-stats_begin = 200
+stats_begin = 2600
 stats_sample_time = 80
 stats_fluid=.true.
 /
