@@ -23,7 +23,7 @@ bc_labels(3) = 'w'
 bc_labels(4) = 'w'
 jlimit='11:30:00'
 restart_file='joblimit00000.chkp'
-stats_begin = 2600
+stats_begin = 2500
 stats_sample_time = 80
 stats_fluid=.true.
 /
