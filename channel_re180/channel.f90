@@ -101,7 +101,7 @@ contains
     type(param_t), intent(inout) :: params
     integer :: tstep, trunc_bits
     tstep = 0
-    trunc_bits = 40
+    trunc_bits = 0 ! Number of bits to remove from the mantissa, bits left = 52-trunc_bits
     truncer = trunc_t(u%dof%size(),trunc_bits)
     call user_trunc(t, tstep, u, v, w, p, coef, params)
   end subroutine user_initialize
