@@ -2,20 +2,20 @@ module trunc
   use, intrinsic :: iso_fortran_env
   use, intrinsic :: iso_c_binding
   implicit none
-   
-  type trunc_t 
+
+  type trunc_t
      integer(kind=INT64) :: mask, rounding_bit
      integer(kind=INT64), allocatable :: work_array(:)
      integer :: n
      integer :: bits
-   contains 
+   contains
      procedure, pass(this) :: truncate => trunc_func
   end type trunc_t
 
   interface trunc_t
      module procedure trunc_init
   end interface trunc_t
-  
+
 contains
 
   function trunc_init(n, n_trunc_bits) result(this)
@@ -47,7 +47,7 @@ contains
     if(allocated(this%work_array)) deallocate(this%work_array)
 
   end subroutine trunc_free
- 
+
   subroutine trunc_func(this,vector_to_trunc)
     class(trunc_t) :: this
     real(kind=REAL64), intent(inout) :: vector_to_trunc(this%n)
@@ -73,7 +73,7 @@ module user
   use neko
   use trunc
   implicit none
-  
+
   type(trunc_t) :: truncer
   integer, parameter :: n_pts = 9
   integer :: ele(n_pts) = (/1,1+1*18,1+2*18,1+3*18,1+4*18,1+5*18,1+6*18,1+7*18,1+8*18/)
@@ -101,7 +101,7 @@ contains
     type(param_t), intent(inout) :: params
     integer :: tstep, trunc_bits
     tstep = 0
-    trunc_bits = 0 ! Number of bits to remove from the mantissa, bits left = 52-trunc_bits
+    trunc_bits = 40 ! Number of bits to remove from the mantissa, bits left = 52-trunc_bits
     truncer = trunc_t(u%dof%size(),trunc_bits)
     call user_trunc(t, tstep, u, v, w, p, coef, params)
   end subroutine user_initialize
